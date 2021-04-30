@@ -14,7 +14,7 @@ import (
 // J, X                               8
 // Q, Z                               10
 
-var letterScores = map[byte]int{
+var letterScores = map[rune]int{
 	'A': 1,
 	'E': 1,
 	'I': 1,
@@ -46,11 +46,8 @@ var letterScores = map[byte]int{
 // Score calculate the Scrabble score for that word.
 func Score(input string) int {
 	totalScore := 0
-	for _, c := range []byte(strings.ToUpper(input)) {
-		score, ok := letterScores[c]
-		if ok {
-			totalScore += score
-		}
+	for _, c := range strings.ToUpper(input) {
+		totalScore += letterScores[c]
 	}
 	return totalScore
 }
