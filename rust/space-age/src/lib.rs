@@ -1,13 +1,11 @@
-use conv::ValueFrom;
-
 #[derive(Debug)]
 pub struct Duration {
-    seconds: u64,
+    seconds: f64,
 }
 
 impl From<u64> for Duration {
     fn from(s: u64) -> Self {
-        Duration { seconds: s }
+        Duration { seconds: s as f64 }
     }
 }
 
@@ -17,8 +15,7 @@ pub trait Planet {
     const ORBITAL_PERIOD: f64 = 1.0;
 
     fn years_during(d: &Duration) -> f64 {
-        let seconds = f64::value_from(d.seconds).unwrap();
-        seconds / (Self::ORBITAL_PERIOD * EARTH_YEAR_SECONDS)
+        d.seconds / (Self::ORBITAL_PERIOD * EARTH_YEAR_SECONDS)
     }
 }
 
